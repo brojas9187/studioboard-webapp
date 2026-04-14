@@ -82,6 +82,9 @@ DATABASE_URL=${{Postgres.DATABASE_URL}}
 SOLID_QUEUE_IN_PUMA=true
 ```
 
+`RAILS_MASTER_KEY` must be the exact contents of `config/master.key`.
+It is not the same value as `secret_key_base`, and it should be pasted without quotes or extra whitespace.
+
 Optional app variables:
 
 ```bash
@@ -98,7 +101,7 @@ Notes:
 
 - Production can run from a single PostgreSQL database on Railway. `CACHE_DATABASE_URL`, `QUEUE_DATABASE_URL`, and `CABLE_DATABASE_URL` are optional overrides if you ever want dedicated databases later.
 - If `APP_URL` is not set, the app will fall back to Railway's `RAILWAY_PUBLIC_DOMAIN` when present.
-- The container entrypoint already runs `bin/rails db:prepare` before the web server boots.
+- The container now starts Rails on `0.0.0.0:$PORT`, which matches Railway's healthcheck expectations.
 
 Suggested Railway flow:
 
