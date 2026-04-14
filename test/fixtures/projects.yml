@@ -1,0 +1,17 @@
+alpha:
+  organization: studio
+  creator: owner
+  name: Alpha Launch
+  description: First free-plan project.
+
+beta:
+  organization: studio
+  creator: admin
+  name: Beta Pipeline
+  description: Second free-plan project.
+
+pro_project:
+  organization: pro_studio
+  creator: pro_owner
+  name: Growth Ops
+  description: Project inside a Pro organization.

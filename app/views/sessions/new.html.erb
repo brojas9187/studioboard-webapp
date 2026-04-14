@@ -1,0 +1,46 @@
+<section class="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+  <div class="card-panel overflow-hidden p-8">
+    <div class="rounded-[2rem] bg-[linear-gradient(135deg,_#10233f,_#193a65_55%,_#2f6f8d)] p-8 text-white">
+      <p class="kicker !text-slate-300"><%= t(".hero.kicker") %></p>
+      <h1 class="mt-3 text-4xl text-white"><%= t(".hero.title") %></h1>
+      <p class="mt-4 max-w-lg text-slate-200"><%= t(".hero.description") %></p>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2">
+        <div class="rounded-3xl bg-white/10 p-4 text-sm text-slate-100"><%= t(".hero.cards.billing") %></div>
+        <div class="rounded-3xl bg-white/10 p-4 text-sm text-slate-100"><%= t(".hero.cards.permissions") %></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-panel p-8">
+    <div class="space-y-6">
+      <div>
+        <p class="kicker"><%= t(".form.kicker") %></p>
+        <h2 class="mt-2 text-3xl"><%= t(".form.title") %></h2>
+      </div>
+
+      <% if google_oauth_configured? %>
+        <div class="space-y-3">
+          <%= render "shared/google_sign_in_button", label: t(".google_cta") %>
+          <p class="text-center text-xs uppercase tracking-[0.22em] text-slate-400"><%= t(".divider") %></p>
+        </div>
+      <% end %>
+
+      <%= form_with url: session_path, scope: :session, class: "space-y-5" do |form| %>
+        <div>
+          <%= form.label :email, t("activerecord.attributes.user.email") %>
+          <%= form.email_field :email, class: "input-field", placeholder: t(".form.email_placeholder") %>
+        </div>
+
+        <div>
+          <%= form.label :password, t("activerecord.attributes.user.password") %>
+          <%= form.password_field :password, class: "input-field", placeholder: t(".form.password_placeholder") %>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <%= form.submit t("app.actions.sign_in"), class: "btn-primary" %>
+          <%= link_to t(".need_account"), new_registration_path, class: "text-sm font-medium text-slate-600 hover:text-slate-900" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

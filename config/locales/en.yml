@@ -1,0 +1,426 @@
+en:
+  app:
+    name: "StudioBoard"
+    tagline: "Mini SaaS for teams"
+    locales:
+      en: "EN"
+      es: "ES"
+    navigation:
+      dashboard: "Dashboard"
+      projects: "Projects"
+      members: "Members"
+      organization: "Organization"
+      billing: "Billing"
+    actions:
+      create_account: "Create account"
+      create_your_account: "Create your account"
+      sign_in: "Sign in"
+      sign_out: "Sign out"
+      create_organization: "Create organization"
+      save_changes: "Save changes"
+      new_project: "New project"
+      open_billing: "Open billing"
+      upgrade_to_pro: "Upgrade to Pro"
+      view_all: "View all"
+      add_member: "Add member"
+      save: "Save"
+      remove: "Remove"
+      create_project: "Create project"
+      back_to_projects: "Back to projects"
+      back_to_projects_arrow: "← Back to projects"
+      edit_project: "Edit project"
+      delete_project: "Delete project"
+      open: "Open"
+      edit: "Edit"
+      delete: "Delete"
+      back_to_dashboard: "Back to dashboard"
+      create_task: "Create task"
+      mark_pending: "Mark pending"
+      mark_done: "Mark done"
+      manage_payment_methods: "Manage payment methods"
+    labels:
+      projects: "Projects"
+      members: "Members"
+      tasks: "Tasks"
+      completed: "Completed"
+      current_plan: "Current plan"
+      required_environment_variables: "Required environment variables"
+      webhook_endpoint: "Webhook endpoint"
+      checkout_mode: "Checkout mode"
+      assign_to: "Assign to"
+    plan_names:
+      free: "Free"
+      pro: "Pro"
+    role_names:
+      owner: "Owner"
+      admin: "Admin"
+      member: "Member"
+    payment_method_types:
+      card: "Card"
+      link: "Link"
+      us_bank_account: "US bank account"
+      sepa_debit: "SEPA debit"
+      ideal: "iDEAL"
+      sofort: "Sofort"
+    empty_states:
+      no_description: "No description yet."
+    task_status:
+      pending: "pending"
+      done: "done"
+  flash:
+    locale_switched: "Language changed to %{language}."
+    authentication:
+      required: "Please sign in to continue."
+    authorization:
+      owner_only: "Only organization owners can access that area."
+      project_manager_required: "You don't have permission to manage projects."
+    organizations:
+      required: "Create an organization to start using StudioBoard."
+      created: "Organization created successfully."
+      updated: "Organization details updated."
+      switched: "Switched to %{name}."
+    registrations:
+      created: "Your account is ready. Create your organization to continue."
+    sessions:
+      signed_in: "Welcome back, %{name}."
+      invalid_credentials: "We couldn't match that email and password."
+      signed_out: "You have been signed out."
+    oauth:
+      google_signed_in: "Signed in with Google as %{name}."
+      google_failed: "Google sign-in could not be completed."
+      google_failed_with_reason: "Google sign-in failed: %{reason}."
+      google_missing_email: "Google did not return an email address for this account."
+      google_missing_identity: "Google did not return a valid account identity."
+    memberships:
+      member_limit_reached: "Your current plan has reached the member limit. Upgrade to Pro to add more teammates."
+      email_required: "Enter the email address of an existing user to add them."
+      user_missing: "That user does not exist yet. Ask them to sign up first."
+      created: "%{user} joined %{organization} as %{role}."
+      owner_role_locked: "The owner role cannot be reassigned from this screen."
+      updated: "%{user} is now %{role}."
+      owner_membership_locked: "The owner membership cannot be removed."
+      cannot_remove_self: "You can't remove yourself from the organization."
+      removed: "%{user} was removed from the organization."
+    projects:
+      created: "Project created successfully."
+      updated: "Project updated successfully."
+      deleted: "%{name} was deleted."
+      limit_reached_owner: "Your Free plan allows up to 2 projects. Upgrade to Pro to unlock unlimited projects."
+      limit_reached_member: "Your organization reached the Free plan project limit. Ask an owner to upgrade to Pro."
+    tasks:
+      created: "Task created successfully."
+      updated: "Task status updated."
+      deleted: "Task deleted."
+      forbidden: "You don't have permission to manage that task."
+    billing:
+      checkout_success: "Checkout completed. We'll confirm the upgrade as soon as Stripe sends the webhook."
+      checkout_cancelled: "Checkout was cancelled before payment was completed."
+  services:
+    stripe:
+      checkout_creation_failed: "Stripe checkout could not be created."
+      unreadable_response: "Stripe returned an unreadable response."
+      missing_configuration: "Missing Stripe configuration: %{keys}."
+      portal_creation_failed: "Stripe customer portal could not be created."
+      customer_portal_missing_customer: "No Stripe customer is linked to this organization yet."
+      secret_key_missing: "Missing Stripe configuration: STRIPE_SECRET_KEY."
+  shared:
+    form_errors:
+      title: "Please fix the following before continuing:"
+    navbar:
+      current_organization: "Current organization"
+      switch_org: "Switch org"
+      active: "Active"
+  home:
+    index:
+      hero_badge: "Rails 8 + Tailwind + Hotwire"
+      title: "Run projects, roles, and billing from one calm workspace."
+      description: "StudioBoard is a compact multi-tenant SaaS for small teams: organizations, memberships, projects, tasks, plan limits, Stripe upgrades, and a little Turbo speed where it counts."
+      cards:
+        tenancy:
+          kicker: "Tenancy"
+          title: "Organizations first"
+          body: "Every project, task, role, and billing event belongs to an organization."
+        limits:
+          kicker: "Limits"
+          title: "Free or Pro"
+          body: "Launch on a capped free plan and unlock unlimited projects and members with Stripe."
+        hotwire:
+          kicker: "Hotwire"
+          title: "Fast task flow"
+          body: "Create and update tasks without reloading the whole project page."
+      mvp:
+        kicker: "What you ship in the MVP"
+        title: "A practical SaaS skeleton, not just a demo screen."
+        items:
+          auth:
+            label: "Auth"
+            body: "Account creation, sign in, sign out, and owner onboarding."
+          projects:
+            label: "Projects"
+            body: "CRUD flows with role-aware permissions and plan-aware limits."
+          tasks:
+            label: "Tasks"
+            body: "Turbo-powered create, toggle, and delete inside each project."
+          billing:
+            label: "Billing"
+            body: "Stripe Checkout in test mode plus webhook-driven plan upgrades."
+  registrations:
+    new:
+      kicker: "Create account"
+      title: "Start building your StudioBoard workspace."
+      description: "Sign up first, then create your organization and invite the rest of your team."
+      next_steps_title: "What happens next"
+      next_steps:
+        first: "You create your first organization."
+        second: "You become the owner automatically."
+        third: "You can add projects, teammates, and billing later."
+      form:
+        kicker: "Account details"
+        title: "Create your login"
+        name_placeholder: "Jamie Rivera"
+        email_placeholder: "jamie@team.com"
+        password_placeholder: "At least 8 characters"
+        password_confirmation_placeholder: "Repeat password"
+      google_cta: "Continue with Google"
+      divider: "or continue with email"
+      already_have_account: "Already have an account?"
+  sessions:
+    new:
+      hero:
+        kicker: "Welcome back"
+        title: "Jump back into your team workspace."
+        description: "Review plan limits, spin up projects, and keep task updates moving without page reloads."
+        cards:
+          billing: "Owner-only billing and organization settings."
+          permissions: "Admin-managed projects plus member-safe task permissions."
+      form:
+        kicker: "Sign in"
+        title: "Use your StudioBoard account"
+        email_placeholder: "jamie@team.com"
+        password_placeholder: "Your password"
+      google_cta: "Continue with Google"
+      divider: "or continue with email"
+      need_account: "Need an account?"
+  organizations:
+    form:
+      name_label: "Organization name"
+      name_placeholder: "Northwind Studio"
+    new:
+      title_kicker: "Organization setup"
+      title_text: "Create your first workspace"
+      title_copy: "Every project, task, and role in StudioBoard belongs to an organization. You'll be the owner automatically."
+    edit:
+      title_kicker: "Organization settings"
+      title_text: "Update your workspace details"
+      title_copy: "Owners can rename the organization, manage billing, and keep the team workspace current."
+  dashboard:
+    show:
+      overview:
+        kicker: "Overview"
+        title: "Welcome to %{organization}."
+        description: "Keep the team aligned with clean project tracking, role-aware permissions, and plan controls that are easy to understand."
+      free_plan:
+        kicker: "Free plan limits"
+        body: "%{projects_left} project slots left and %{members_left} member slots left."
+      stats:
+        projects: "Tracked inside the current organization."
+        members: "Roles are stored on memberships."
+        tasks: "Across all active projects."
+        completed: "Tasks marked done by the team."
+      recent_projects:
+        kicker: "Recent projects"
+        title: "What the team is working on"
+        updated_ago: "Updated %{time} ago"
+        empty: "No projects yet. Create your first project to start tracking work."
+      open_tasks:
+        kicker: "Open tasks"
+        title: "What still needs attention"
+        assignment: "%{project} • assigned to %{assignee}"
+        empty: "No pending tasks right now. Nice work."
+  memberships:
+    index:
+      header:
+        kicker: "Team members"
+        title: "Roles live on memberships."
+        description: "Owners handle billing and organization settings. Admins manage projects and tasks. Members can work inside projects and manage their own tasks."
+      plan_usage:
+        free: "%{count}/3 members used"
+        pro: "Unlimited members"
+      add_member:
+        kicker: "Add teammate"
+        title: "Bring an existing user into the organization."
+        description: "For this MVP, the teammate must already have a StudioBoard account before you add them by email."
+        email_label: "Existing user email"
+        email_placeholder: "teammate@company.com"
+      list:
+        kicker: "Membership list"
+        title: "Everyone in %{organization}"
+        remove_confirm: "Remove %{user} from the organization?"
+        primary_owner: "Primary owner"
+        managed_by_owner: "Managed by the owner"
+        empty: "No members yet."
+  projects:
+    form:
+      name_label: "Project name"
+      name_placeholder: "Client launch board"
+      description_placeholder: "What are we delivering here?"
+    new:
+      title_kicker: "New project"
+      title_text: "Create a workspace the team can organize around"
+      title_copy: "Admins and owners can create projects. Free plan organizations can have up to two projects."
+    edit:
+      title_kicker: "Edit project"
+      title_text: "Refine the project details"
+      title_copy: "Keep the scope, language, and context current for everyone working in the board."
+    index:
+      header:
+        kicker: "Projects"
+        title: "Organize the work in one place."
+        description: "Every task lives inside a project. Admins and owners can create and edit projects; owners are the only role allowed to delete them."
+      free_plan:
+        kicker: "Free plan usage"
+        body: "%{count}/2 projects used."
+        owner_hint: "Upgrade to Pro for unlimited projects."
+        member_hint: "Ask an owner to upgrade if you need more projects."
+      project_card:
+        created_by: "Created by %{name}"
+        updated_ago: "Updated %{time} ago"
+        delete_confirm: "Delete %{name} and all its tasks?"
+      empty:
+        kicker: "No projects yet"
+        title: "Create the first project for this organization."
+        description: "This is the anchor point for tasks, ownership, and collaboration."
+    show:
+      kicker: "Project details"
+      delete_confirm: "Delete %{name} and every task inside it?"
+  tasks:
+    form:
+      kicker: "New task"
+      title: "Add work inside %{project}"
+      description: "Members can create tasks for themselves. Admins and owners can assign work to anyone in the organization."
+      title_placeholder: "Draft launch copy"
+      description_placeholder: "Optional details, notes, or acceptance criteria"
+      self_assignment_notice: "This task will be assigned to you automatically."
+    panel:
+      kicker: "Tasks"
+      title: "Track progress without leaving the page"
+      counts:
+        open: "%{count} open"
+        done: "%{count} done"
+      no_extra_notes: "No extra notes for this task."
+      assignment: "Assigned to %{assignee} • Created by %{creator}"
+      delete_confirm: "Delete %{title}?"
+      read_only: "Read-only for your role"
+      empty:
+        kicker: "No tasks yet"
+        title: "Add the first task to get work moving."
+        description: "The form on the left uses Turbo, so new tasks appear here without a full page reload."
+  billing:
+    show:
+      header:
+        kicker: "Billing"
+        title: "Manage the plan for %{organization}."
+        description: "Owners can upgrade the organization from Free to Pro using Stripe Checkout in test mode. The webhook upgrades the organization as soon as Stripe confirms the session."
+        plan_badge: "%{plan} plan"
+      current_access:
+        kicker: "Current access"
+        pro_title: "Pro is active"
+        free_title: "Free plan is active"
+        projects_pro: "Unlimited projects on Pro."
+        projects_free: "Free plan supports up to 2 projects."
+        members_pro: "Unlimited members on Pro."
+        members_free: "Free plan supports up to 3 members."
+      upgrade:
+        kicker: "Upgrade path"
+        title: "Unlock unlimited projects and teammates."
+        description: "Stripe Checkout runs in test mode. After payment, the webhook switches this organization to Pro automatically."
+        unavailable: "Upgrade unavailable until Stripe is configured"
+        already_pro: "This organization is already on Pro. If Stripe later sends a subscription deletion event, StudioBoard will move it back to Free."
+      payment_methods:
+        kicker: "Payment methods"
+        title: "Update the card or billing source on file"
+        description: "Stripe's customer portal lets the owner update saved payment methods, billing details, invoices, and subscription information."
+        portal_unavailable: "Payment-method management will unlock after Stripe creates the customer"
+      setup:
+        kicker: "Stripe setup"
+        title: "Configuration checklist"
+        checkout_mode_html: "This implementation uses Stripe Checkout in <strong>subscription</strong> mode with a test price."
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      organization:
+        name: "Organization name"
+      project:
+        name: "Project name"
+        description: "Description"
+      task:
+        title: "Title"
+        description: "Description"
+        assignee: "Assignee"
+      membership:
+        role: "Role"
+        user: "User"
+        creator: "Creator"
+    errors:
+      models:
+        membership:
+          attributes:
+            role:
+              owner_already_exists: "owner already exists for this organization"
+        task:
+          attributes:
+            creator:
+              must_belong_to_organization: "must belong to the organization"
+            assignee:
+              must_belong_to_organization: "must belong to the organization"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "can't be blank"
+      taken: "has already been taken"
+      invalid: "is invalid"
+      too_short: "is too short (minimum is %{count} characters)"
+      confirmation: "doesn't match %{attribute}"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "about 1 hour"
+        other: "about %{count} hours"
+      about_x_months:
+        one: "about 1 month"
+        other: "about %{count} months"
+      about_x_years:
+        one: "about 1 year"
+        other: "about %{count} years"
+      almost_x_years:
+        one: "almost 1 year"
+        other: "almost %{count} years"
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one: "less than 1 second"
+        other: "less than %{count} seconds"
+      less_than_x_minutes:
+        one: "less than a minute"
+        other: "less than %{count} minutes"
+      over_x_years:
+        one: "over 1 year"
+        other: "over %{count} years"
+      x_seconds:
+        one: "1 second"
+        other: "%{count} seconds"
+      x_minutes:
+        one: "1 minute"
+        other: "%{count} minutes"
+      x_days:
+        one: "1 day"
+        other: "%{count} days"
+      x_months:
+        one: "1 month"
+        other: "%{count} months"
+      x_years:
+        one: "1 year"
+        other: "%{count} years"

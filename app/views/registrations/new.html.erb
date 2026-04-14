@@ -1,0 +1,62 @@
+<section class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+  <div class="space-y-5">
+    <p class="kicker"><%= t(".kicker") %></p>
+    <h1 class="text-4xl sm:text-5xl"><%= t(".title") %></h1>
+    <p class="max-w-xl text-lg text-slate-600"><%= t(".description") %></p>
+    <div class="card-panel p-6">
+      <p class="text-sm font-semibold text-slate-900"><%= t(".next_steps_title") %></p>
+      <ul class="mt-3 space-y-2 text-sm text-slate-600">
+        <li><%= t(".next_steps.first") %></li>
+        <li><%= t(".next_steps.second") %></li>
+        <li><%= t(".next_steps.third") %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-panel p-8">
+    <div class="space-y-6">
+      <div>
+        <p class="kicker"><%= t(".form.kicker") %></p>
+        <h2 class="mt-2 text-3xl"><%= t(".form.title") %></h2>
+      </div>
+
+      <% if google_oauth_configured? %>
+        <div class="space-y-3">
+          <%= render "shared/google_sign_in_button", label: t(".google_cta") %>
+          <p class="text-center text-xs uppercase tracking-[0.22em] text-slate-400"><%= t(".divider") %></p>
+        </div>
+      <% end %>
+
+      <%= render "shared/form_errors", resource: @user %>
+
+      <%= form_with model: @user, url: registration_path, class: "space-y-5" do |form| %>
+        <div>
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "input-field", placeholder: t(".form.name_placeholder") %>
+        </div>
+
+        <div>
+          <%= form.label :email %>
+          <%= form.email_field :email, class: "input-field", placeholder: t(".form.email_placeholder") %>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <%= form.label :password %>
+            <%= form.password_field :password, class: "input-field", placeholder: t(".form.password_placeholder") %>
+          </div>
+
+          <div>
+            <%= form.label :password_confirmation %>
+            <%= form.password_field :password_confirmation, class: "input-field", placeholder: t(".form.password_confirmation_placeholder") %>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <%= form.submit t("app.actions.create_account"), class: "btn-primary" %>
+          <%= link_to t(".already_have_account"), new_session_path, class: "text-sm font-medium text-slate-600 hover:text-slate-900" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

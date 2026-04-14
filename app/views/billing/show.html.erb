@@ -1,0 +1,101 @@
+<section class="space-y-8">
+  <div class="card-panel p-8">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="kicker"><%= t(".header.kicker") %></p>
+        <h1 class="mt-3 text-4xl"><%= t(".header.title", organization: current_organization.name) %></h1>
+        <p class="mt-3 max-w-3xl text-slate-600"><%= t(".header.description") %></p>
+      </div>
+      <span class="pill <%= plan_badge_classes(current_organization.plan) %>"><%= t(".header.plan_badge", plan: translated_plan_name(current_organization.plan)) %></span>
+    </div>
+  </div>
+
+  <div class="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+    <div class="card-panel p-6">
+      <p class="kicker"><%= t(".current_access.kicker") %></p>
+      <h2 class="mt-2 text-2xl"><%= current_organization.pro? ? t(".current_access.pro_title") : t(".current_access.free_title") %></h2>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-3xl border border-slate-200 p-5">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"><%= t("app.labels.projects") %></p>
+          <p class="mt-3 text-3xl font-bold text-slate-950"><%= current_organization.project_limit || "∞" %></p>
+          <p class="mt-2 text-sm text-slate-600"><%= current_organization.pro? ? t(".current_access.projects_pro") : t(".current_access.projects_free") %></p>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 p-5">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500"><%= t("app.labels.members") %></p>
+          <p class="mt-3 text-3xl font-bold text-slate-950"><%= current_organization.member_limit || "∞" %></p>
+          <p class="mt-2 text-sm text-slate-600"><%= current_organization.pro? ? t(".current_access.members_pro") : t(".current_access.members_free") %></p>
+        </div>
+      </div>
+
+      <% if current_organization.free? %>
+        <div class="mt-6 rounded-3xl bg-slate-950 p-6 text-white">
+          <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300"><%= t(".upgrade.kicker") %></p>
+          <h3 class="mt-3 text-2xl text-white"><%= t(".upgrade.title") %></h3>
+          <p class="mt-3 max-w-2xl text-sm text-slate-200"><%= t(".upgrade.description") %></p>
+
+          <div class="mt-6">
+            <% if @stripe_configured %>
+              <%= button_to t("app.actions.upgrade_to_pro"), checkout_billing_path, method: :post, class: "btn-primary !bg-white !text-slate-950 hover:!bg-slate-100" %>
+            <% else %>
+              <button class="btn-primary !cursor-not-allowed !bg-slate-400" disabled><%= t(".upgrade.unavailable") %></button>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="mt-6 space-y-4">
+          <div class="card-muted p-6 text-sm text-slate-600">
+            <%= t(".upgrade.already_pro") %>
+          </div>
+
+          <div class="rounded-3xl border border-slate-200 p-6">
+            <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500"><%= t(".payment_methods.kicker") %></p>
+            <h3 class="mt-3 text-2xl text-slate-950"><%= t(".payment_methods.title") %></h3>
+            <p class="mt-3 text-sm text-slate-600"><%= t(".payment_methods.description") %></p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <% @payment_method_types.each do |payment_method_type| %>
+                <span class="pill bg-slate-100 text-slate-700"><%= payment_method_label(payment_method_type) %></span>
+              <% end %>
+            </div>
+
+            <div class="mt-6">
+              <% if @portal_available %>
+                <%= button_to t("app.actions.manage_payment_methods"), portal_billing_path, method: :post, class: "btn-primary" %>
+              <% else %>
+                <button class="btn-primary !cursor-not-allowed !bg-slate-400" disabled><%= t(".payment_methods.portal_unavailable") %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-panel p-6">
+      <p class="kicker"><%= t(".setup.kicker") %></p>
+      <h2 class="mt-2 text-2xl"><%= t(".setup.title") %></h2>
+
+      <div class="mt-6 space-y-4 text-sm text-slate-600">
+        <div class="rounded-3xl border border-slate-200 p-5">
+          <p class="font-semibold text-slate-900"><%= t("app.labels.required_environment_variables") %></p>
+          <ul class="mt-3 space-y-2">
+            <li><code>STRIPE_SECRET_KEY</code></li>
+            <li><code>STRIPE_PRICE_ID</code></li>
+            <li><code>STRIPE_WEBHOOK_SECRET</code></li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 p-5">
+          <p class="font-semibold text-slate-900"><%= t("app.labels.webhook_endpoint") %></p>
+          <p class="mt-2"><code><%= stripe_webhook_url %></code></p>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 p-5">
+          <p class="font-semibold text-slate-900"><%= t("app.labels.checkout_mode") %></p>
+          <p class="mt-2"><%= t(".setup.checkout_mode_html") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

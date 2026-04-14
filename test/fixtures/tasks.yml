@@ -1,0 +1,17 @@
+design_task:
+  project: alpha
+  creator: owner
+  assignee: member
+  title: Draft launch copy
+  description: Put together the first version of the launch messaging.
+  completed: false
+  completed_at:
+
+review_task:
+  project: alpha
+  creator: admin
+  assignee: admin
+  title: Review timeline
+  description: Confirm the delivery timeline with the client.
+  completed: true
+  completed_at: <%= 1.day.ago %>

@@ -1,0 +1,76 @@
+<nav class="shell pt-6">
+  <div class="card-panel px-5 py-4 sm:px-6">
+    <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+        <%= link_to root_path, class: "inline-flex items-center gap-3" do %>
+          <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-lg font-bold text-white shadow-lg shadow-slate-950/15">SB</span>
+          <span>
+            <span class="block text-lg font-bold text-slate-950"><%= t("app.name") %></span>
+            <span class="block text-xs uppercase tracking-[0.24em] text-slate-500"><%= t("app.tagline") %></span>
+          </span>
+        <% end %>
+
+        <% if authenticated? && current_organization.present? %>
+          <div class="hidden h-8 w-px bg-slate-200 lg:block"></div>
+          <div class="rounded-2xl bg-slate-50 px-4 py-2">
+            <p class="text-xs uppercase tracking-[0.22em] text-slate-500"><%= t(".current_organization") %></p>
+            <div class="mt-1 flex items-center gap-2">
+              <span class="font-semibold text-slate-900"><%= current_organization.name %></span>
+              <span class="pill <%= plan_badge_classes(current_organization.plan) %>"><%= translated_plan_name(current_organization.plan) %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center rounded-full border border-slate-200 bg-white p-1">
+          <% available_locales.each do |locale| %>
+            <%= button_to locale_name(locale),
+                          switch_locale_path(locale: locale),
+                          method: :patch,
+                          params: { return_to: request.fullpath },
+                          class: locale_switch_button_classes(locale) %>
+          <% end %>
+        </div>
+
+        <% if authenticated? %>
+          <% if current_organization.present? %>
+            <%= nav_link_to t("app.navigation.dashboard"), dashboard_path %>
+            <%= nav_link_to t("app.navigation.projects"), projects_path %>
+            <%= nav_link_to t("app.navigation.members"), memberships_path %>
+            <% if current_membership&.owner? %>
+              <%= nav_link_to t("app.navigation.organization"), edit_organization_path(current_organization) %>
+              <%= nav_link_to t("app.navigation.billing"), billing_path %>
+            <% end %>
+
+            <% if current_user.organizations.many? %>
+              <details class="relative">
+                <summary class="btn-secondary cursor-pointer list-none"><%= t(".switch_org") %></summary>
+                <div class="absolute right-0 z-10 mt-3 w-72 rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-900/10">
+                  <% current_user.memberships.includes(:organization).sort_by { |membership| membership.organization.name.downcase }.each do |membership| %>
+                    <%= button_to switch_organization_path(membership.organization), method: :patch, class: "flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left transition hover:bg-slate-50" do %>
+                      <span>
+                        <span class="block font-semibold text-slate-900"><%= membership.organization.name %></span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-slate-500"><%= translated_role_name(membership.role) %></span>
+                      </span>
+                      <% if membership.organization_id == current_organization.id %>
+                        <span class="pill bg-emerald-100 text-emerald-900"><%= t(".active") %></span>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </details>
+            <% end %>
+          <% else %>
+            <%= link_to t("app.actions.create_organization"), new_organization_path, class: "btn-primary" %>
+          <% end %>
+
+          <%= button_to t("app.actions.sign_out"), session_path, method: :delete, class: "btn-secondary" %>
+        <% else %>
+          <%= link_to t("app.actions.sign_in"), new_session_path, class: "btn-secondary" %>
+          <%= link_to t("app.actions.create_account"), new_registration_path, class: "btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

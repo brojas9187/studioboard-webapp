@@ -1,0 +1,426 @@
+es:
+  app:
+    name: "StudioBoard"
+    tagline: "Mini SaaS para equipos"
+    locales:
+      en: "EN"
+      es: "ES"
+    navigation:
+      dashboard: "Dashboard"
+      projects: "Proyectos"
+      members: "Miembros"
+      organization: "Organización"
+      billing: "Facturación"
+    actions:
+      create_account: "Crear cuenta"
+      create_your_account: "Crear tu cuenta"
+      sign_in: "Iniciar sesión"
+      sign_out: "Cerrar sesión"
+      create_organization: "Crear organización"
+      save_changes: "Guardar cambios"
+      new_project: "Nuevo proyecto"
+      open_billing: "Abrir facturación"
+      upgrade_to_pro: "Mejorar a Pro"
+      view_all: "Ver todo"
+      add_member: "Agregar miembro"
+      save: "Guardar"
+      remove: "Quitar"
+      create_project: "Crear proyecto"
+      back_to_projects: "Volver a proyectos"
+      back_to_projects_arrow: "← Volver a proyectos"
+      edit_project: "Editar proyecto"
+      delete_project: "Eliminar proyecto"
+      open: "Abrir"
+      edit: "Editar"
+      delete: "Eliminar"
+      back_to_dashboard: "Volver al dashboard"
+      create_task: "Crear tarea"
+      mark_pending: "Marcar pendiente"
+      mark_done: "Marcar hecha"
+      manage_payment_methods: "Gestionar métodos de pago"
+    labels:
+      projects: "Proyectos"
+      members: "Miembros"
+      tasks: "Tareas"
+      completed: "Completadas"
+      current_plan: "Plan actual"
+      required_environment_variables: "Variables de entorno requeridas"
+      webhook_endpoint: "Endpoint del webhook"
+      checkout_mode: "Modo de Checkout"
+      assign_to: "Asignar a"
+    plan_names:
+      free: "Free"
+      pro: "Pro"
+    role_names:
+      owner: "Owner"
+      admin: "Admin"
+      member: "Member"
+    payment_method_types:
+      card: "Tarjeta"
+      link: "Link"
+      us_bank_account: "Cuenta bancaria de EE. UU."
+      sepa_debit: "Débito SEPA"
+      ideal: "iDEAL"
+      sofort: "Sofort"
+    empty_states:
+      no_description: "Todavía no hay descripción."
+    task_status:
+      pending: "pendiente"
+      done: "hecha"
+  flash:
+    locale_switched: "Idioma cambiado a %{language}."
+    authentication:
+      required: "Inicia sesión para continuar."
+    authorization:
+      owner_only: "Solo los owners de la organización pueden entrar a esa sección."
+      project_manager_required: "No tienes permisos para gestionar proyectos."
+    organizations:
+      required: "Crea una organización para empezar a usar StudioBoard."
+      created: "La organización fue creada correctamente."
+      updated: "Los datos de la organización fueron actualizados."
+      switched: "Cambiaste a %{name}."
+    registrations:
+      created: "Tu cuenta ya está lista. Crea tu organización para continuar."
+    sessions:
+      signed_in: "Bienvenido de vuelta, %{name}."
+      invalid_credentials: "No pudimos encontrar un usuario con ese email y contraseña."
+      signed_out: "Tu sesión fue cerrada."
+    oauth:
+      google_signed_in: "Sesión iniciada con Google como %{name}."
+      google_failed: "No se pudo completar el inicio de sesión con Google."
+      google_failed_with_reason: "El inicio de sesión con Google falló: %{reason}."
+      google_missing_email: "Google no devolvió un email para esta cuenta."
+      google_missing_identity: "Google no devolvió una identidad válida de cuenta."
+    memberships:
+      member_limit_reached: "Tu plan actual llegó al límite de miembros. Mejora a Pro para agregar más personas."
+      email_required: "Ingresa el email de un usuario existente para agregarlo."
+      user_missing: "Ese usuario todavía no existe. Pídele que se registre primero."
+      created: "%{user} se unió a %{organization} como %{role}."
+      owner_role_locked: "El rol owner no se puede reasignar desde esta pantalla."
+      updated: "%{user} ahora es %{role}."
+      owner_membership_locked: "La membresía owner no se puede eliminar."
+      cannot_remove_self: "No puedes quitarte a ti mismo de la organización."
+      removed: "%{user} fue eliminado de la organización."
+    projects:
+      created: "El proyecto fue creado correctamente."
+      updated: "El proyecto fue actualizado correctamente."
+      deleted: "%{name} fue eliminado."
+      limit_reached_owner: "Tu plan Free permite hasta 2 proyectos. Mejora a Pro para desbloquear proyectos ilimitados."
+      limit_reached_member: "Tu organización alcanzó el límite de proyectos del plan Free. Pídele a un owner que mejore a Pro."
+    tasks:
+      created: "La tarea fue creada correctamente."
+      updated: "El estado de la tarea fue actualizado."
+      deleted: "La tarea fue eliminada."
+      forbidden: "No tienes permisos para gestionar esa tarea."
+    billing:
+      checkout_success: "El checkout se completó. Confirmaremos la mejora cuando Stripe envíe el webhook."
+      checkout_cancelled: "El checkout se canceló antes de completar el pago."
+  services:
+    stripe:
+      checkout_creation_failed: "No se pudo crear el checkout de Stripe."
+      unreadable_response: "Stripe devolvió una respuesta ilegible."
+      missing_configuration: "Falta configuración de Stripe: %{keys}."
+      portal_creation_failed: "No se pudo crear el portal de clientes de Stripe."
+      customer_portal_missing_customer: "Todavía no hay un cliente de Stripe vinculado a esta organización."
+      secret_key_missing: "Falta configuración de Stripe: STRIPE_SECRET_KEY."
+  shared:
+    form_errors:
+      title: "Corrige lo siguiente antes de continuar:"
+    navbar:
+      current_organization: "Organización actual"
+      switch_org: "Cambiar org"
+      active: "Activa"
+  home:
+    index:
+      hero_badge: "Rails 8 + Tailwind + Hotwire"
+      title: "Gestiona proyectos, roles y cobros desde un espacio tranquilo."
+      description: "StudioBoard es un mini SaaS multi-tenant para equipos pequeños: organizaciones, membresías, proyectos, tareas, límites por plan, upgrades con Stripe y un poco de Turbo donde realmente suma."
+      cards:
+        tenancy:
+          kicker: "Multi-tenant"
+          title: "Primero la organización"
+          body: "Cada proyecto, tarea, rol y evento de facturación pertenece a una organización."
+        limits:
+          kicker: "Límites"
+          title: "Free o Pro"
+          body: "Empieza con un plan gratuito con topes y desbloquea proyectos y miembros ilimitados con Stripe."
+        hotwire:
+          kicker: "Hotwire"
+          title: "Flujo rápido de tareas"
+          body: "Crea y actualiza tareas sin recargar toda la página del proyecto."
+      mvp:
+        kicker: "Lo que trae el MVP"
+        title: "Una base SaaS práctica, no solo una pantalla de demo."
+        items:
+          auth:
+            label: "Auth"
+            body: "Creación de cuenta, inicio de sesión, cierre de sesión y onboarding del owner."
+          projects:
+            label: "Proyectos"
+            body: "Flujos CRUD con permisos por rol y límites según el plan."
+          tasks:
+            label: "Tareas"
+            body: "Crear, cambiar estado y eliminar tareas con Turbo dentro de cada proyecto."
+          billing:
+            label: "Facturación"
+            body: "Stripe Checkout en modo test y upgrade a Pro vía webhook."
+  registrations:
+    new:
+      kicker: "Crear cuenta"
+      title: "Empieza a construir tu espacio en StudioBoard."
+      description: "Primero regístrate, luego crea tu organización e invita al resto del equipo."
+      next_steps_title: "Qué pasa después"
+      next_steps:
+        first: "Creas tu primera organización."
+        second: "Quedas automáticamente como owner."
+        third: "Más adelante puedes agregar proyectos, equipo y facturación."
+      form:
+        kicker: "Datos de la cuenta"
+        title: "Crea tu acceso"
+        name_placeholder: "Jamie Rivera"
+        email_placeholder: "jamie@team.com"
+        password_placeholder: "Al menos 8 caracteres"
+        password_confirmation_placeholder: "Repite la contraseña"
+      google_cta: "Continuar con Google"
+      divider: "o continuar con email"
+      already_have_account: "¿Ya tienes una cuenta?"
+  sessions:
+    new:
+      hero:
+        kicker: "Bienvenido de vuelta"
+        title: "Vuelve rápido a tu espacio de equipo."
+        description: "Revisa límites del plan, levanta proyectos y mantén el flujo de tareas sin recargar páginas."
+        cards:
+          billing: "Facturación y ajustes de organización solo para owners."
+          permissions: "Proyectos para admins y permisos seguros para tareas de members."
+      form:
+        kicker: "Iniciar sesión"
+        title: "Usa tu cuenta de StudioBoard"
+        email_placeholder: "jamie@team.com"
+        password_placeholder: "Tu contraseña"
+      google_cta: "Continuar con Google"
+      divider: "o continuar con email"
+      need_account: "¿Necesitas una cuenta?"
+  organizations:
+    form:
+      name_label: "Nombre de la organización"
+      name_placeholder: "Northwind Studio"
+    new:
+      title_kicker: "Configuración de organización"
+      title_text: "Crea tu primer workspace"
+      title_copy: "Cada proyecto, tarea y rol en StudioBoard pertenece a una organización. Vas a quedar como owner automáticamente."
+    edit:
+      title_kicker: "Ajustes de organización"
+      title_text: "Actualiza los datos de tu workspace"
+      title_copy: "Los owners pueden cambiar el nombre de la organización, gestionar la facturación y mantener el espacio del equipo al día."
+  dashboard:
+    show:
+      overview:
+        kicker: "Resumen"
+        title: "Bienvenido a %{organization}."
+        description: "Mantén al equipo alineado con seguimiento de proyectos, permisos por rol y límites de plan fáciles de entender."
+      free_plan:
+        kicker: "Límites del plan Free"
+        body: "Quedan %{projects_left} cupos de proyectos y %{members_left} cupos de miembros."
+      stats:
+        projects: "Seguimiento dentro de la organización actual."
+        members: "Los roles viven en las membresías."
+        tasks: "A través de todos los proyectos activos."
+        completed: "Tareas marcadas como hechas por el equipo."
+      recent_projects:
+        kicker: "Proyectos recientes"
+        title: "En qué está trabajando el equipo"
+        updated_ago: "Actualizado hace %{time}"
+        empty: "Todavía no hay proyectos. Crea el primero para empezar a seguir el trabajo."
+      open_tasks:
+        kicker: "Tareas abiertas"
+        title: "Lo que todavía necesita atención"
+        assignment: "%{project} • asignada a %{assignee}"
+        empty: "No hay tareas pendientes ahora mismo. Bien ahí."
+  memberships:
+    index:
+      header:
+        kicker: "Miembros del equipo"
+        title: "Los roles viven en las membresías."
+        description: "Los owners gestionan facturación y ajustes de organización. Los admins gestionan proyectos y tareas. Los members trabajan dentro de los proyectos y manejan sus propias tareas."
+      plan_usage:
+        free: "%{count}/3 miembros usados"
+        pro: "Miembros ilimitados"
+      add_member:
+        kicker: "Agregar teammate"
+        title: "Incorpora un usuario existente a la organización."
+        description: "En este MVP, la persona ya debe tener una cuenta en StudioBoard antes de que la agregues por email."
+        email_label: "Email de usuario existente"
+        email_placeholder: "teammate@company.com"
+      list:
+        kicker: "Lista de membresías"
+        title: "Todas las personas en %{organization}"
+        remove_confirm: "¿Quitar a %{user} de la organización?"
+        primary_owner: "Owner principal"
+        managed_by_owner: "Gestionado por el owner"
+        empty: "Todavía no hay miembros."
+  projects:
+    form:
+      name_label: "Nombre del proyecto"
+      name_placeholder: "Tablero de lanzamiento"
+      description_placeholder: "¿Qué estamos entregando aquí?"
+    new:
+      title_kicker: "Nuevo proyecto"
+      title_text: "Crea un espacio que el equipo pueda usar para organizarse"
+      title_copy: "Admins y owners pueden crear proyectos. Las organizaciones en plan Free pueden tener hasta dos proyectos."
+    edit:
+      title_kicker: "Editar proyecto"
+      title_text: "Refina los detalles del proyecto"
+      title_copy: "Mantén el alcance, el lenguaje y el contexto actualizados para todos los que trabajan en el board."
+    index:
+      header:
+        kicker: "Proyectos"
+        title: "Organiza el trabajo en un solo lugar."
+        description: "Cada tarea vive dentro de un proyecto. Admins y owners pueden crear y editar proyectos; solo los owners pueden eliminarlos."
+      free_plan:
+        kicker: "Uso del plan Free"
+        body: "%{count}/2 proyectos usados."
+        owner_hint: "Mejora a Pro para tener proyectos ilimitados."
+        member_hint: "Pídele a un owner que mejore si necesitan más proyectos."
+      project_card:
+        created_by: "Creado por %{name}"
+        updated_ago: "Actualizado hace %{time}"
+        delete_confirm: "¿Eliminar %{name} y todas sus tareas?"
+      empty:
+        kicker: "Todavía no hay proyectos"
+        title: "Crea el primer proyecto para esta organización."
+        description: "Este es el punto de apoyo para tareas, ownership y colaboración."
+    show:
+      kicker: "Detalles del proyecto"
+      delete_confirm: "¿Eliminar %{name} y todas las tareas dentro?"
+  tasks:
+    form:
+      kicker: "Nueva tarea"
+      title: "Agregar trabajo dentro de %{project}"
+      description: "Los members pueden crear tareas para sí mismos. Los admins y owners pueden asignar trabajo a cualquiera dentro de la organización."
+      title_placeholder: "Redactar copy de lanzamiento"
+      description_placeholder: "Detalles opcionales, notas o criterios de aceptación"
+      self_assignment_notice: "Esta tarea quedará asignada a ti automáticamente."
+    panel:
+      kicker: "Tareas"
+      title: "Sigue el progreso sin salir de la página"
+      counts:
+        open: "%{count} abiertas"
+        done: "%{count} hechas"
+      no_extra_notes: "No hay notas extra para esta tarea."
+      assignment: "Asignada a %{assignee} • Creada por %{creator}"
+      delete_confirm: "¿Eliminar %{title}?"
+      read_only: "Solo lectura para tu rol"
+      empty:
+        kicker: "Todavía no hay tareas"
+        title: "Agrega la primera tarea para poner el trabajo en marcha."
+        description: "El formulario de la izquierda usa Turbo, así que las nuevas tareas aparecen aquí sin una recarga completa."
+  billing:
+    show:
+      header:
+        kicker: "Facturación"
+        title: "Gestiona el plan de %{organization}."
+        description: "Los owners pueden mejorar la organización de Free a Pro usando Stripe Checkout en modo test. El webhook hace el upgrade apenas Stripe confirma la sesión."
+        plan_badge: "Plan %{plan}"
+      current_access:
+        kicker: "Acceso actual"
+        pro_title: "Pro está activo"
+        free_title: "El plan Free está activo"
+        projects_pro: "Proyectos ilimitados en Pro."
+        projects_free: "El plan Free permite hasta 2 proyectos."
+        members_pro: "Miembros ilimitados en Pro."
+        members_free: "El plan Free permite hasta 3 miembros."
+      upgrade:
+        kicker: "Ruta de upgrade"
+        title: "Desbloquea proyectos y teammates ilimitados."
+        description: "Stripe Checkout corre en modo test. Después del pago, el webhook cambia esta organización a Pro automáticamente."
+        unavailable: "El upgrade no está disponible hasta que Stripe esté configurado"
+        already_pro: "Esta organización ya está en Pro. Si más adelante Stripe envía un evento de eliminación de suscripción, StudioBoard la moverá de vuelta a Free."
+      payment_methods:
+        kicker: "Métodos de pago"
+        title: "Actualiza la tarjeta o fuente de cobro guardada"
+        description: "El portal de clientes de Stripe le permite al owner actualizar métodos de pago guardados, datos de facturación, facturas e información de la suscripción."
+        portal_unavailable: "La gestión de métodos de pago se habilitará cuando Stripe cree el cliente"
+      setup:
+        kicker: "Configuración de Stripe"
+        title: "Checklist de configuración"
+        checkout_mode_html: "Esta implementación usa Stripe Checkout en modo de <strong>suscripción</strong> con un precio de prueba."
+  activerecord:
+    attributes:
+      user:
+        name: "Nombre"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+      organization:
+        name: "Nombre de la organización"
+      project:
+        name: "Nombre del proyecto"
+        description: "Descripción"
+      task:
+        title: "Título"
+        description: "Descripción"
+        assignee: "Responsable"
+      membership:
+        role: "Rol"
+        user: "Usuario"
+        creator: "Creador"
+    errors:
+      models:
+        membership:
+          attributes:
+            role:
+              owner_already_exists: "ya existe un owner para esta organización"
+        task:
+          attributes:
+            creator:
+              must_belong_to_organization: "debe pertenecer a la organización"
+            assignee:
+              must_belong_to_organization: "debe pertenecer a la organización"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "no puede estar en blanco"
+      taken: "ya está en uso"
+      invalid: "no es válido"
+      too_short: "es demasiado corto (mínimo %{count} caracteres)"
+      confirmation: "no coincide con %{attribute}"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "alrededor de 1 hora"
+        other: "alrededor de %{count} horas"
+      about_x_months:
+        one: "alrededor de 1 mes"
+        other: "alrededor de %{count} meses"
+      about_x_years:
+        one: "alrededor de 1 año"
+        other: "alrededor de %{count} años"
+      almost_x_years:
+        one: "casi 1 año"
+        other: "casi %{count} años"
+      half_a_minute: "medio minuto"
+      less_than_x_seconds:
+        one: "menos de 1 segundo"
+        other: "menos de %{count} segundos"
+      less_than_x_minutes:
+        one: "menos de un minuto"
+        other: "menos de %{count} minutos"
+      over_x_years:
+        one: "más de 1 año"
+        other: "más de %{count} años"
+      x_seconds:
+        one: "1 segundo"
+        other: "%{count} segundos"
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      x_days:
+        one: "1 día"
+        other: "%{count} días"
+      x_months:
+        one: "1 mes"
+        other: "%{count} meses"
+      x_years:
+        one: "1 año"
+        other: "%{count} años"

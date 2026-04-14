@@ -1,0 +1,87 @@
+<section class="space-y-8">
+  <div class="card-panel p-8">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="kicker"><%= t(".header.kicker") %></p>
+        <h1 class="mt-3 text-4xl"><%= t(".header.title") %></h1>
+        <p class="mt-3 max-w-3xl text-slate-600"><%= t(".header.description") %></p>
+      </div>
+      <div class="rounded-3xl bg-slate-50 px-5 py-4">
+        <p class="text-sm font-semibold text-slate-900"><%= t("app.labels.current_plan") %></p>
+        <p class="mt-2 text-sm text-slate-600">
+          <span class="pill <%= plan_badge_classes(current_organization.plan) %>"><%= translated_plan_name(current_organization.plan) %></span>
+          <% if current_organization.free? %>
+            <span class="ml-2"><%= t(".plan_usage.free", count: current_organization.memberships.count) %></span>
+          <% else %>
+            <span class="ml-2"><%= t(".plan_usage.pro") %></span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <% if current_membership&.owner? %>
+    <div class="card-panel p-6">
+      <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <p class="kicker"><%= t(".add_member.kicker") %></p>
+          <h2 class="mt-2 text-2xl"><%= t(".add_member.title") %></h2>
+          <p class="mt-3 text-sm text-slate-600"><%= t(".add_member.description") %></p>
+        </div>
+
+        <%= form_with url: memberships_path, scope: :membership, class: "grid gap-4 sm:grid-cols-[1.4fr_0.8fr_auto]" do |form| %>
+          <div>
+            <%= form.label :email, t(".add_member.email_label") %>
+            <%= form.email_field :email, class: "input-field", placeholder: t(".add_member.email_placeholder") %>
+          </div>
+
+          <div>
+            <%= form.label :role, t("activerecord.attributes.membership.role") %>
+            <%= form.select :role, member_role_options, {}, class: "input-field" %>
+          </div>
+
+          <div class="self-end">
+            <%= form.submit t("app.actions.add_member"), class: "btn-primary w-full" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card-panel overflow-hidden">
+    <div class="border-b border-slate-100 px-6 py-5">
+      <p class="kicker"><%= t(".list.kicker") %></p>
+      <h2 class="mt-2 text-2xl"><%= t(".list.title", organization: current_organization.name) %></h2>
+    </div>
+
+    <% if @memberships.any? %>
+      <% @memberships.each do |membership| %>
+        <div class="grid gap-4 border-b border-slate-100 px-6 py-5 last:border-b-0 md:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)_auto] md:items-center">
+          <div>
+            <p class="font-semibold text-slate-900"><%= membership.user.display_name %></p>
+            <p class="mt-1 text-sm text-slate-500"><%= membership.user.email %></p>
+          </div>
+
+          <div>
+            <span class="pill <%= role_badge_classes(membership.role) %>"><%= translated_role_name(membership.role) %></span>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-start gap-2 md:justify-end">
+            <% if current_membership&.owner? && !membership.owner? %>
+              <%= form_with model: membership, class: "flex items-center gap-2" do |form| %>
+                <%= form.select :role, member_role_options, { selected: membership.role }, class: "rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700" %>
+                <%= form.submit t("app.actions.save"), class: "btn-secondary !px-4 !py-2.5" %>
+              <% end %>
+
+              <%= button_to t("app.actions.remove"), membership_path(membership), method: :delete, class: "btn-danger", form: { data: { turbo_confirm: t(".list.remove_confirm", user: membership.user.display_name) } } %>
+            <% else %>
+              <span class="text-sm text-slate-500"><%= membership.owner? ? t(".list.primary_owner") : t(".list.managed_by_owner") %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="px-6 py-8 text-sm text-slate-600"><%= t(".list.empty") %></div>
+    <% end %>
+  </div>
+</section>

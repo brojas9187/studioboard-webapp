@@ -1,0 +1,11 @@
+<%= turbo_stream.update "task_form" do %>
+  <%= render "tasks/form", project: @project, task: @form_task, member_options: @member_options %>
+<% end %>
+
+<%= turbo_stream.update "tasks_panel" do %>
+  <%= render "tasks/panel", project: @project, tasks: @tasks %>
+<% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <%= render "shared/flash" %>
+<% end %>

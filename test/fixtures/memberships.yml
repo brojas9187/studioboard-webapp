@@ -1,0 +1,19 @@
+owner_membership:
+  organization: studio
+  user: owner
+  role: owner
+
+admin_membership:
+  organization: studio
+  user: admin
+  role: admin
+
+member_membership:
+  organization: studio
+  user: member
+  role: member
+
+pro_owner_membership:
+  organization: pro_studio
+  user: pro_owner
+  role: owner

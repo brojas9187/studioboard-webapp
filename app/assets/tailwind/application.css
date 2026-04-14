@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --studio-navy: #10233f;
+  --studio-cyan: #92f3d8;
+  --studio-peach: #ffb89a;
+}
+
+@layer base {
+  body {
+    font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+    @apply text-slate-900 antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Fraunces", Georgia, serif;
+    @apply tracking-tight text-slate-900;
+  }
+
+  a {
+    @apply transition;
+  }
+
+  label {
+    @apply block text-sm font-medium text-slate-700;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-panel {
+    @apply rounded-[2rem] border border-white/70 bg-white/90 shadow-[0_24px_70px_-28px_rgba(15,23,42,0.35)] backdrop-blur;
+  }
+
+  .card-muted {
+    @apply rounded-3xl border border-slate-200/80 bg-slate-50/80;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/15 transition hover:-translate-y-0.5 hover:bg-slate-800;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100;
+  }
+
+  .input-field {
+    @apply mt-2 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-slate-400 focus:ring-4 focus:ring-slate-100;
+  }
+
+  .textarea-field {
+    @apply mt-2 min-h-28 w-full resize-y rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-slate-400 focus:ring-4 focus:ring-slate-100;
+  }
+
+  .nav-link {
+    @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .nav-link-active {
+    @apply bg-slate-900 text-white hover:bg-slate-900 hover:text-white;
+  }
+
+  .pill {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
+  }
+
+  .stat-card {
+    @apply rounded-[2rem] border border-white/70 bg-white/90 p-5 shadow-[0_24px_70px_-28px_rgba(15,23,42,0.35)] backdrop-blur;
+  }
+
+  .section-title {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  .kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.28em] text-slate-500;
+  }
+}

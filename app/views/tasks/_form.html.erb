@@ -1,0 +1,40 @@
+<div class="card-panel p-6">
+  <div class="space-y-5">
+    <div>
+      <p class="kicker"><%= t(".kicker") %></p>
+      <h2 class="mt-2 text-2xl"><%= t(".title", project: project.name) %></h2>
+      <p class="mt-2 text-sm text-slate-600"><%= t(".description") %></p>
+    </div>
+
+    <%= render "shared/form_errors", resource: task %>
+
+    <%= form_with model: [project, task], class: "space-y-4" do |form| %>
+      <div>
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "input-field", placeholder: t(".title_placeholder") %>
+      </div>
+
+      <div>
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "textarea-field", placeholder: t(".description_placeholder") %>
+      </div>
+
+      <% if project_management_allowed? %>
+        <div>
+          <%= form.label :assignee_id, t("app.labels.assign_to") %>
+          <%= form.collection_select :assignee_id,
+                                     member_options,
+                                     :user_id,
+                                     ->(membership) { membership_option_label(membership) },
+                                     {},
+                                     class: "input-field" %>
+        </div>
+      <% else %>
+        <%= form.hidden_field :assignee_id, value: current_user.id %>
+        <div class="card-muted p-4 text-sm text-slate-600"><%= t(".self_assignment_notice") %></div>
+      <% end %>
+
+      <%= form.submit t("app.actions.create_task"), class: "btn-primary w-full" %>
+    <% end %>
+  </div>
+</div>

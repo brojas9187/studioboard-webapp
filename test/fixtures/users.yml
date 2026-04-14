@@ -1,0 +1,29 @@
+owner:
+  name: Olivia Owner
+  email: owner@example.com
+  password_salt: salt-owner
+  password_digest: <%= User.digest_password("password123", "salt-owner") %>
+
+admin:
+  name: Alex Admin
+  email: admin@example.com
+  password_salt: salt-admin
+  password_digest: <%= User.digest_password("password123", "salt-admin") %>
+
+member:
+  name: Morgan Member
+  email: member@example.com
+  password_salt: salt-member
+  password_digest: <%= User.digest_password("password123", "salt-member") %>
+
+extra:
+  name: Erin Extra
+  email: extra@example.com
+  password_salt: salt-extra
+  password_digest: <%= User.digest_password("password123", "salt-extra") %>
+
+pro_owner:
+  name: Priya Pro
+  email: pro@example.com
+  password_salt: salt-pro
+  password_digest: <%= User.digest_password("password123", "salt-pro") %>

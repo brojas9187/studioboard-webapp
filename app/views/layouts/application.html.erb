@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || t("app.name") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen">
+    <div class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(146,243,216,0.42),_transparent_38%),radial-gradient(circle_at_top_right,_rgba(255,184,154,0.28),_transparent_34%),linear-gradient(180deg,_#fffdf8_0%,_#f4f7fb_48%,_#eef3ff_100%)]"></div>
+    <div class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-56 bg-[linear-gradient(180deg,_rgba(16,35,63,0.08),_transparent)]"></div>
+
+    <%= render "shared/navbar" %>
+
+    <div id="flash" class="shell pt-6">
+      <%= render "shared/flash" %>
+    </div>
+
+    <main class="shell pb-16 pt-6">
+      <%= yield %>
+    </main>
+  </body>
+</html>

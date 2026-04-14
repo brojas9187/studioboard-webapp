@@ -1,0 +1,11 @@
+studio:
+  name: Studio HQ
+  plan: free
+  stripe_customer_id:
+  stripe_subscription_id:
+
+pro_studio:
+  name: Pro Space
+  plan: pro
+  stripe_customer_id: cus_existing
+  stripe_subscription_id: sub_existing

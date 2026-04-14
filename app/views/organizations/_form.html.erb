@@ -1,0 +1,25 @@
+<div class="card-panel p-8">
+  <div class="space-y-6">
+    <div>
+      <p class="kicker"><%= title_kicker %></p>
+      <h1 class="mt-2 text-4xl"><%= title_text %></h1>
+      <p class="mt-3 max-w-2xl text-slate-600"><%= title_copy %></p>
+    </div>
+
+    <%= render "shared/form_errors", resource: organization %>
+
+    <%= form_with model: organization, class: "space-y-5" do |form| %>
+      <div>
+        <%= form.label :name, t(".name_label") %>
+        <%= form.text_field :name, class: "input-field", placeholder: t(".name_placeholder") %>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <%= form.submit submit_label, class: "btn-primary" %>
+        <% if current_organization.present? %>
+          <%= link_to t("app.actions.back_to_dashboard"), dashboard_path, class: "btn-secondary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

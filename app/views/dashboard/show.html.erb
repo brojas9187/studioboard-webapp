@@ -1,0 +1,115 @@
+<section class="space-y-8">
+  <div class="card-panel p-8">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="kicker"><%= t(".overview.kicker") %></p>
+        <h1 class="mt-3 text-4xl sm:text-5xl"><%= t(".overview.title", organization: current_organization.name) %></h1>
+        <p class="mt-3 max-w-3xl text-lg text-slate-600"><%= t(".overview.description") %></p>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <% if project_management_allowed? %>
+          <%= link_to t("app.actions.new_project"), new_project_path, class: "btn-primary" %>
+        <% end %>
+        <% if current_membership&.owner? %>
+          <%= link_to t("app.actions.open_billing"), billing_path, class: "btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if current_organization.free? %>
+    <div class="card-panel border border-amber-200 bg-amber-50/80 p-6">
+      <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.22em] text-amber-900"><%= t(".free_plan.kicker") %></p>
+          <p class="mt-2 text-sm text-amber-900"><%= t(".free_plan.body", projects_left: current_organization.projects_left, members_left: current_organization.members_left) %></p>
+        </div>
+        <% if current_membership&.owner? %>
+          <%= link_to t("app.actions.upgrade_to_pro"), billing_path, class: "btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div class="stat-card">
+      <p class="kicker"><%= t("app.labels.projects") %></p>
+      <p class="mt-4 text-4xl font-bold text-slate-950"><%= @project_count %></p>
+      <p class="mt-2 text-sm text-slate-500"><%= t(".stats.projects") %></p>
+    </div>
+    <div class="stat-card">
+      <p class="kicker"><%= t("app.labels.members") %></p>
+      <p class="mt-4 text-4xl font-bold text-slate-950"><%= @member_count %></p>
+      <p class="mt-2 text-sm text-slate-500"><%= t(".stats.members") %></p>
+    </div>
+    <div class="stat-card">
+      <p class="kicker"><%= t("app.labels.tasks") %></p>
+      <p class="mt-4 text-4xl font-bold text-slate-950"><%= @task_count %></p>
+      <p class="mt-2 text-sm text-slate-500"><%= t(".stats.tasks") %></p>
+    </div>
+    <div class="stat-card">
+      <p class="kicker"><%= t("app.labels.completed") %></p>
+      <p class="mt-4 text-4xl font-bold text-slate-950"><%= @completed_task_count %></p>
+      <p class="mt-2 text-sm text-slate-500"><%= t(".stats.completed") %></p>
+    </div>
+  </div>
+
+  <div class="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
+    <div class="card-panel p-6">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="kicker"><%= t(".recent_projects.kicker") %></p>
+          <h2 class="mt-2 text-2xl"><%= t(".recent_projects.title") %></h2>
+        </div>
+        <%= link_to t("app.actions.view_all"), projects_path, class: "btn-secondary" %>
+      </div>
+
+      <div class="mt-6 space-y-3">
+        <% if @recent_projects.any? %>
+          <% @recent_projects.each do |project| %>
+            <%= link_to project_path(project), class: "block rounded-3xl border border-slate-200 p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50" do %>
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <h3 class="text-xl"><%= project.name %></h3>
+                  <p class="mt-2 text-sm text-slate-600"><%= project.description.presence || t("app.empty_states.no_description") %></p>
+                </div>
+                <div class="text-sm text-slate-500">
+                  <%= t(".recent_projects.updated_ago", time: time_ago_in_words(project.updated_at)) %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="card-muted p-6 text-sm text-slate-600"><%= t(".recent_projects.empty") %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card-panel p-6">
+      <p class="kicker"><%= t(".open_tasks.kicker") %></p>
+      <h2 class="mt-2 text-2xl"><%= t(".open_tasks.title") %></h2>
+
+      <div class="mt-6 space-y-3">
+        <% if @open_tasks.any? %>
+          <% @open_tasks.each do |task| %>
+            <div class="rounded-3xl border border-slate-200 p-5">
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p class="font-semibold text-slate-900"><%= task.title %></p>
+                  <p class="mt-1 text-sm text-slate-500"><%= t(".open_tasks.assignment", project: task.project.name, assignee: task.assignee.display_name) %></p>
+                </div>
+                <span class="pill <%= task_status_badge_classes(task) %>"><%= t("app.task_status.pending") %></span>
+              </div>
+              <% if task.description.present? %>
+                <p class="mt-3 text-sm text-slate-600"><%= task.description %></p>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-muted p-6 text-sm text-slate-600"><%= t(".open_tasks.empty") %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

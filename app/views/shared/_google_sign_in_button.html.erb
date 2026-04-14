@@ -1,0 +1,12 @@
+<%= button_to "/auth/google_oauth2",
+              method: :post,
+              class: "flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50",
+              form: { data: { turbo: false } } do %>
+  <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24">
+    <path fill="#EA4335" d="M12 10.2v3.92h5.45c-.24 1.26-.96 2.32-2.04 3.04l3.3 2.56c1.92-1.76 3.03-4.36 3.03-7.44 0-.72-.06-1.4-.18-2.08z"/>
+    <path fill="#34A853" d="M12 22c2.92 0 5.37-.96 7.16-2.6l-3.3-2.56c-.92.62-2.08.98-3.86.98-2.8 0-5.17-1.9-6.02-4.44H2.57v2.64A10.82 10.82 0 0 0 12 22z"/>
+    <path fill="#4A90E2" d="M5.98 13.38A6.49 6.49 0 0 1 5.64 12c0-.48.08-.94.22-1.38V7.98H2.57A10.82 10.82 0 0 0 1.2 12c0 1.74.42 3.39 1.17 4.82z"/>
+    <path fill="#FBBC05" d="M12 6.18c1.58 0 2.98.54 4.1 1.6l3.08-3.08C17.36 2.98 14.92 2 12 2A10.82 10.82 0 0 0 2.57 7.98l3.29 2.64C6.83 8.08 9.2 6.18 12 6.18z"/>
+  </svg>
+  <span><%= label %></span>
+<% end %>
