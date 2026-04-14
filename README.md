@@ -149,4 +149,4 @@ Google sign-in links users by email when a matching local account already exists
 ```bash
 bin/rails test
 ```
-# studioboard-webapp
+
